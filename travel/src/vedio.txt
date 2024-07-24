@@ -1,0 +1,51 @@
+<div className="mb-6">
+        {videos.length > 0 && (
+          <div>
+            <h2 className="mb-4 text-2xl font-semibold">Videos</h2>
+            <div className="grid grid-cols-1 gap-4 overflow-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-h-80">
+              {videoViewUrls.map((url, index) => (
+                <div key={index} className="relative cursor-pointer" onClick={() => handleMediaClick(url, 'video')}>
+                  <video className="object-cover w-full h-32 rounded-md"controls>
+                    <source src={url} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+
+
+<div className="mb-4">
+<label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="videos">
+    Upload Videos
+</label>
+<Input
+    type="file"
+    id="videos"
+    multiple
+    accept="video/*"
+    {...register('videos')}
+    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+/>
+</div> 
+
+const videos = journal.videos || [];
+const videoViewUrls = videos.map(videoId => journalService.getFileView(videoId).href);
+
+selected media type
+<video  className="w-full max-h-screen"controls>
+                <source src={selectedMedia.url} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+
+ // Upload videos
+            const videoFileIds = await Promise.all(
+                Array.from(data.videos).map(async (file) => {
+                    const response = await journalService.uploadFile(file);
+                    return response.$id;
+                })
+            );
+            newJournal.videos = videoFileIds;

@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  outline: none;
+  text-decoration: none;
+  transition: all 0.2s linear;
+}
+*::selection {
+  background: black;
+  color: #fff;
+}
